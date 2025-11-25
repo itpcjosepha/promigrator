@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
   try {
@@ -11,10 +12,22 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: In the future:
-    // - Save to Postgres
-    // - Send to SendGrid/Mailchimp/etc.
-    console.log("📥 New beta signup:", email);
+    const trimmedEmail = email.trim().toLowerCase();
+
+    // Basic sanity check
+    if (!trimmedEmail.includes("@") || !trimmedEmail.includes(".")) {
+      return NextResponse.json(
+        { ok: false, message: "Please enter a valid email address." },
+        { status: 400 }
+      );
+    }
+
+    // Write or noop if it already exists
+    await prisma.subscriber.upsert({
+      where: { email: trimmedEmail },
+      create: { email: trimmedEmail },
+      update: {}, // do nothing if already exists
+    });
 
     return NextResponse.json({
       ok: true,
