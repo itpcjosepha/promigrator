@@ -1,13 +1,14 @@
 import Link from "next/link";
 import EmailSignup from "@/components/EmailSignup";
+import { PromigratorHeroBackground } from "@/components/PromigratorHeroBackground";
 
 export default function Home() {
   const year = new Date().getFullYear();
 
   return (
-    <main className="min-h-screen bg-[#121014] text-zinc-100">
+    <main className="min-h-screen bg-background text-foreground">
       {/* ===== TOP NAV ===== */}
-      <header className="sticky top-0 z-20 border-b border-zinc-800 bg-[#121014]/90 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-zinc-800 bg-background">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-baseline gap-2">
             <span className="text-lg font-semibold tracking-tight text-zinc-50">
@@ -39,8 +40,12 @@ export default function Home() {
       </header>
 
       {/* ===== HERO (Single column, dark) ===== */}
-      <section className="border-b border-zinc-800 bg-[#121014]">
-        <div className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
+      <section className="relative border-b border-zinc-800 bg-background overflow-hidden">
+        {/* 3D background */}
+        <PromigratorHeroBackground />
+
+        {/* Hero content on top of 3D */}
+        <div className="relative z-10 mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-zinc-500">
             Tools for serious FileMaker teams
           </p>
@@ -84,7 +89,7 @@ export default function Home() {
       {/* ===== WHY PRO-MIGRATOR ===== */}
       <section
         id="why"
-        className="border-b border-zinc-800 bg-[#18151b] px-6 py-16"
+        className="border-b border-zinc-800 bg-background px-6 py-16"
       >
         <div className="mx-auto max-w-5xl space-y-10">
           <div className="max-w-2xl space-y-3">
@@ -100,7 +105,7 @@ export default function Home() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="space-y-2 rounded-3xl border border-zinc-800 bg-[#1f1b22] p-5">
+            <div className="space-y-2 rounded-3xl border border-zinc-800 bg-[#2f2b33] p-5">
               <h3 className="text-sm font-semibold text-zinc-50">
                 Predictable releases
               </h3>
@@ -110,7 +115,7 @@ export default function Home() {
                 steps.
               </p>
             </div>
-            <div className="space-y-2 rounded-3xl border border-zinc-800 bg-[#1f1b22] p-5">
+            <div className="space-y-2 rounded-3xl border border-zinc-800 bg-[#2f2b33] p-5">
               <h3 className="text-sm font-semibold text-zinc-50">
                 SQL-ready from day one
               </h3>
@@ -120,7 +125,7 @@ export default function Home() {
                 operate on clean, stable data.
               </p>
             </div>
-            <div className="space-y-2 rounded-3xl border border-zinc-800 bg-[#1f1b22] p-5">
+            <div className="space-y-2 rounded-3xl border border-zinc-800 bg-[#2f2b33] p-5">
               <h3 className="text-sm font-semibold text-zinc-50">
                 Automation without drama
               </h3>
@@ -137,7 +142,7 @@ export default function Home() {
       {/* ===== PRODUCTS ===== */}
       <section
         id="products"
-        className="border-b border-zinc-800 bg-[#121014] px-6 py-16"
+        className="border-b border-zinc-800 bg-background"
       >
         <div className="mx-auto max-w-6xl space-y-10">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
@@ -176,7 +181,7 @@ export default function Home() {
             </article>
 
             {/* 2SQL */}
-            <article className="flex flex-col justify-between rounded-3xl border border-zinc-800 bg-[#18151b] p-5 transition hover:-translate-y-0.5 hover:border-[#F95601] hover:shadow-[0_18px_40px_rgba(0,0,0,0.65)]">
+            <article className="flex flex-col justify-between rounded-3xl border border-zinc-800 bg-background p-5 transition hover:-translate-y-0.5 hover:border-[#F95601] hover:shadow-[0_18px_40px_rgba(0,0,0,0.65)]">
               <div className="space-y-3">
                 <h3 className="text-sm font-semibold text-zinc-50">
                   2SQL · FileMaker → SQL Server
@@ -197,7 +202,7 @@ export default function Home() {
             </article>
 
             {/* 2PS */}
-            <article className="flex flex-col justify-between rounded-3xl border border-zinc-800 bg-[#18151b] p-5 transition hover:-translate-y-0.5 hover:border-[#F95601] hover:shadow-[0_18px_40px_rgba(0,0,0,0.65)]">
+            <article className="flex flex-col justify-between rounded-3xl border border-zinc-800 bg-background p-5 transition hover:-translate-y-0.5 hover:border-[#F95601] hover:shadow-[0_18px_40px_rgba(0,0,0,0.65)]">
               <div className="space-y-3">
                 <h3 className="text-sm font-semibold text-zinc-50">
                   2PS · PowerShell orchestration
@@ -223,7 +228,7 @@ export default function Home() {
       {/* ===== BETA / SIGNUP ===== */}
       <section
         id="beta"
-        className="bg-[#18151b] px-6 pb-16 pt-12 md:pb-20 md:pt-16"
+        className="bg-background px-6 pb-16 pt-12 md:pb-20 md:pt-16"
       >
         <div className="mx-auto flex max-w-5xl flex-col gap-10 md:flex-row md:items-center">
           <div className="flex-1 space-y-3">
@@ -244,7 +249,7 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="border-t border-zinc-800 bg-[#121014] px-6 py-8">
+      <footer className="border-t border-zinc-800 bg-background px-6 py-8">
         <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-xs text-zinc-500 md:flex-row md:items-center">
           <div>
             <p>© {year} Pro-Migrator.</p>

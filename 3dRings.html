@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Three.js Test</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      #app {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="module">
+      import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
+
+      const container = document.getElementById("app");
+
+      // Scene
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x111111);
+
+      // Camera
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 5;
+
+      // Renderer
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      // ----------------------------------------------------------------
+      // ⭐️ REPLACEMENT FOR THE CUBE SECTION (Example #1)
+      // ----------------------------------------------------------------
+
+      // Create a group to hold the spinning shapes
+      const group = new THREE.Group();
+      scene.add(group);
+
+      // Add lots of colorful torus shapes
+      for (let i = 0; i < 12; i++) {
+        const geo = new THREE.TorusGeometry(0.8, 0.2, 16, 50);
+        const mat = new THREE.MeshStandardMaterial({
+          color: new THREE.Color(`hsl(${i * 30}, 80%, 60%)`),
+          metalness: 0.4,
+          roughness: 0.3,
+        });
+        const torus = new THREE.Mesh(geo, mat);
+
+        // Spread them around in a circle
+        torus.position.set(
+          Math.cos(i) * 2.5,
+          Math.sin(i * 1.8) * 1,
+          Math.sin(i) * 2.5
+        );
+
+        group.add(torus);
+      }
+
+      // ----------------------------------------------------------------
+
+      // Lights
+      const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+      dirLight.position.set(3, 3, 5);
+      scene.add(dirLight);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+
+      // Resize
+      window.addEventListener("resize", () => {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      });
+
+      // Animate
+      function animate() {
+        requestAnimationFrame(animate);
+
+        group.rotation.x += 0.005;
+        group.rotation.y += 0.01;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
