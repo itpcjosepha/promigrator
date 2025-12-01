@@ -1,13 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 type TierCode = "CLIENT" | "SERVER" | "MAX" | "DEV";
 
 type Step = "chooseTier" | "enterEmail" | "awaitCode" | "verifying" | "done";
 
+// Top-level page component that Next.js prerenders.
+// IMPORTANT: this one does NOT call useSearchParams directly.
 export default function RegisterPage() {
+  return (
+    <Suspense fallback={null /* or a small loading UI if you like */}>
+      <RegisterPageInner />
+    </Suspense>
+  );
+}
+
+// All your existing logic moved into an inner component,
+// which IS allowed to call useSearchParams because it's wrapped
+// in <Suspense> by RegisterPage above.
+function RegisterPageInner() {
   const searchParams = useSearchParams();
 
   // These come from FileMaker when it opens the Web Viewer:
