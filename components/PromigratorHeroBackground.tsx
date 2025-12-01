@@ -8,6 +8,12 @@ export function PromigratorHeroBackground() {
   // React ref that points to the DOM element where our WebGL canvas will attach
   const containerRef = useRef<HTMLDivElement | null>(null);
 
+  // Refs for scroll-based parallax:
+  // scrollTarget = "where we want to go" based on scroll position
+  // scrollCurrent = smoothed value we actually use in the animation loop
+  const scrollTarget = useRef(0);
+  const scrollCurrent = useRef(0);
+
   useEffect(() => {
     // Grab the DOM node
     const container = containerRef.current;
@@ -24,10 +30,10 @@ export function PromigratorHeroBackground() {
 
     // Create camera with perspective projection
     const camera = new THREE.PerspectiveCamera(
-      55,                                        // field of view
+      55, // field of view
       container.clientWidth / container.clientHeight, // aspect ratio
-      0.1,                                       // near clipping plane
-      100                                        // far clipping plane
+      0.1, // near clipping plane
+      100 // far clipping plane
     );
     // Position the camera slightly above and back
     camera.position.set(0, 1.5, 6);
@@ -35,7 +41,7 @@ export function PromigratorHeroBackground() {
     // Create renderer (the <canvas> inside container)
     const renderer = new THREE.WebGLRenderer({
       antialias: true, // smooth edges
-      alpha: true,     // allow transparency over page background
+      alpha: true, // allow transparency over page background
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -44,13 +50,13 @@ export function PromigratorHeroBackground() {
     // Orbit controls (even though pointer-events: none prevents mouse input,
     // these give smooth camera damping animation)
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;   // smooth movement
+    controls.enableDamping = true; // smooth movement
     controls.dampingFactor = 0.05;
     controls.rotateSpeed = 0.7;
     controls.zoomSpeed = 0.7;
-    controls.minDistance = 3;        // limits zoom distance
+    controls.minDistance = 3; // limits zoom distance
     controls.maxDistance = 10;
-    controls.target.set(0, 0.5, 0);  // camera orbits around this point
+    controls.target.set(0, 0.5, 0); // camera orbits around this point
     controls.update();
 
     // =====================================================================
@@ -61,12 +67,12 @@ export function PromigratorHeroBackground() {
     const floorGeometry = new THREE.CircleGeometry(8, 64);
     const floorMaterial = new THREE.MeshStandardMaterial({
       color: 0x020617, // deep navy
-      metalness: 0.6,  // metallic finish
+      metalness: 0.6, // metallic finish
       roughness: 0.35, // mid roughness for soft reflections
     });
     const floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.rotation.x = -Math.PI / 2; // make circle horizontal
-    floor.position.y = -1.25;        // slightly below scene center
+    floor.position.y = -1.25; // slightly below scene center
     scene.add(floor);
 
     // =====================================================================
@@ -76,11 +82,11 @@ export function PromigratorHeroBackground() {
     // Large transparent orb behind hero text
     const glassGeometry = new THREE.SphereGeometry(1.2, 64, 64);
     const glassMaterial = new THREE.MeshStandardMaterial({
-      color: 0x38bdf8,     // blue tint
+      color: 0x38bdf8, // blue tint
       metalness: 0.7,
       roughness: 0.12,
       transparent: true,
-      opacity: 0.35,        // adjusts how much text shows through
+      opacity: 0.35, // adjusts how much text shows through
     });
     const glassSphere = new THREE.Mesh(glassGeometry, glassMaterial);
     glassSphere.position.y = 0.5; // raise to mid-screen
@@ -93,9 +99,9 @@ export function PromigratorHeroBackground() {
     // Very small glowing center point (radius is tiny: 0.05)
     const coreGeometry = new THREE.SphereGeometry(0.05, 48, 48);
     const coreMaterial = new THREE.MeshStandardMaterial({
-      color: 0x22c55e,        // green glow color
-      emissive: 0x22c55e,     // self-illumination
-      emissiveIntensity: .0,  // glow amount (0 = off)
+      color: 0x22c55e, // green glow color
+      emissive: 0x22c55e, // self-illumination
+      emissiveIntensity: 0.0, // glow amount (0 = off)
       metalness: 0.2,
       roughness: 0.3,
     });
@@ -107,7 +113,7 @@ export function PromigratorHeroBackground() {
     // === NEON RINGS (DISABLED) ===========================================
     // =====================================================================
 
-    /* 
+    /*
     // These created atomic-looking torus rings. You've disabled them.
     const ringGroup = new THREE.Group();
     scene.add(ringGroup);
@@ -132,7 +138,7 @@ export function PromigratorHeroBackground() {
     */
 
     // =====================================================================
-    // === FLOATING PARTICLES (CURRENTLY SQUARE POINTS) =====================
+    // === FLOATING PARTICLES (FILEMAKER LOGO SPRITES) =====================
     // =====================================================================
 
     // 1. Create buffer geometry for ~400 floating particles
@@ -142,12 +148,12 @@ export function PromigratorHeroBackground() {
 
     // Fill position array with randomly distributed points
     for (let i = 0; i < particlesCount * 3; i += 3) {
-      const radius = 6 * Math.random() + 2;        // distance from center
-      const angle = Math.random() * Math.PI * 2;   // 360° horizontal angle
-      const y = (Math.random() - 0.5) * 4;         // vertical randomness
+      const radius = 6 * Math.random() + 2; // distance from center
+      const angle = Math.random() * Math.PI * 2; // 360° horizontal angle
+      const y = (Math.random() - 0.5) * 4; // vertical randomness
 
-      positions[i] = Math.cos(angle) * radius;     // x
-      positions[i + 1] = y;                        // y
+      positions[i] = Math.cos(angle) * radius; // x
+      positions[i + 1] = y; // y
       positions[i + 2] = Math.sin(angle) * radius; // z
     }
 
@@ -157,45 +163,29 @@ export function PromigratorHeroBackground() {
       new THREE.BufferAttribute(positions, 3)
     );
 
-//     // 2. Material for the particles (currently squares)
-// // === Particle material (soft glow, visually closer to circles) =======
-// const particlesMaterial = new THREE.PointsMaterial({
-//   size: 0.05,                  // a bit larger so the glow is visible
-//   color: 0x60a5fa,             // same blue
-//   transparent: true,
-//   opacity: 0.55,               // softer so overlapping glows look nice
-//   depthWrite: false,           // prevents particles from "cutting holes" in each other
-//   blending: THREE.AdditiveBlending, // additive blending = glow-style
-//   sizeAttenuation: true,       // smaller when farther away
-// });
+    // Loader to fetch the logo texture from Next.js /public folder.
+    // Place the file at: public/claris_logo_white.png
+    const logoTexture = new THREE.TextureLoader().load(
+      "/claris_logo_white.png"
+    );
 
+    // PointsMaterial now uses the FileMaker/Claris logo as a sprite.
+    // Each particle will be a tiny logo billboarded to the camera.
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 0.07, // visual size of each logo (tweak as needed)
+      map: logoTexture, // use the uploaded logo as the sprite
+      color: 0xffffff, // tint color (white = original texture colors)
+      transparent: true, // allow alpha from the PNG
+      opacity: 0.9, // overall visibility
+      alphaTest: 0.5, // discard nearly-transparent pixels (helps remove box edges)
+      depthWrite: false, // keeps particles from punching holes in each other
+      sizeAttenuation: true, // makes them smaller when farther away
+      // blending: THREE.AdditiveBlending, // enable this if you want glowier look
+    });
 
-//     //2.1 Create Points object and add to scene
-//     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-//     scene.add(particles);
-// === Particle material using FileMaker logo sprite ===================
-
-// Loader to fetch the logo texture from Next.js /public folder.
-// Place the file at: public/filemaker-logo.png
-const logoTexture = new THREE.TextureLoader().load("/claris_logo_white.png");
-
-// PointsMaterial now uses the FileMaker logo as a sprite.
-// Each particle will be a tiny logo billboarded to the camera.
-const particlesMaterial = new THREE.PointsMaterial({
-  size: 0.07,             // visual size of each logo (tweak as needed)
-  map: logoTexture,       // use the uploaded FileMaker logo as the sprite
-  color: 0xffffff,        // tint color (white = original texture colors)
-  transparent: true,      // allow alpha from the PNG
-  opacity: 0.9,           // overall visibility
-  alphaTest: 0.5,         // discard nearly-transparent pixels (helps remove box edges)
-  depthWrite: false,      // keeps particles from punching holes in each other
-  sizeAttenuation: true,  // makes them smaller when farther away
-  // blending: THREE.AdditiveBlending, // enable this if you want glowier look
-});
-
-// Final particle system object
-const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(particles);
+    // Final particle system object
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particles);
 
     // =====================================================================
     // === LIGHTS ==========================================================
@@ -242,6 +232,24 @@ scene.add(particles);
     window.addEventListener("resize", handleResize);
 
     // =====================================================================
+    // === SCROLL-BASED PARALLAX SETUP =====================================
+    // =====================================================================
+
+    // Map window.scrollY into a normalized value between 0 and 1.
+    // We'll use that in the animation loop to subtly move the camera
+    // and particle field as the user scrolls.
+    const handleScroll = () => {
+      const maxScroll = window.innerHeight; // how much scroll before we "max out"
+      const raw = window.scrollY / maxScroll;
+      const clamped = Math.max(0, Math.min(raw, 1)); // clamp 0–1
+      scrollTarget.current = clamped;
+    };
+
+    // Initialize once in case user is not at top
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // =====================================================================
     // === ANIMATION LOOP ==================================================
     // =====================================================================
 
@@ -250,6 +258,18 @@ scene.add(particles);
 
     const animate = () => {
       const t = clock.getElapsedTime(); // seconds since start
+
+      // --- Smooth the scroll value over time (lerp toward target) -------
+      scrollCurrent.current = THREE.MathUtils.lerp(
+        scrollCurrent.current,
+        scrollTarget.current,
+        0.08 // smoothing factor – lower = slower, higher = snappier
+      );
+      const p = scrollCurrent.current; // 0 (top) → 1 (scrolled down)
+
+      // -------------------------------------------------------------------
+      // Core animations (existing)
+      // -------------------------------------------------------------------
 
       // Rotate the outer glass sphere
       glassSphere.rotation.y = t * 0.15;
@@ -265,6 +285,19 @@ scene.add(particles);
       // Soft oscillation for lights
       fillLight.position.y = 1.5 + Math.sin(t * 1.2) * 0.3;
       rimLight.position.y = 2.0 + Math.cos(t * 0.9) * 0.25;
+
+      // -------------------------------------------------------------------
+      // Scroll-based parallax
+      // -------------------------------------------------------------------
+      // Move camera slightly down and back as you scroll
+      camera.position.y = 1.5 + p * -1.4; // tilt downward a bit
+      camera.position.z = 6 + p * 2.6; // pull back a bit
+
+      // Nudge the focus point so the orb feels like it slides down slightly
+      controls.target.y = 0.5 + p * -0.8;
+
+      // Drift the particle field vertically for extra depth
+      particles.position.y = p * -2.0;
 
       // Smooth orbit controls update
       controls.update();
@@ -284,6 +317,7 @@ scene.add(particles);
     return () => {
       cancelAnimationFrame(frameId);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
 
       // Stop orbit controls
       controls.dispose();
@@ -313,7 +347,7 @@ scene.add(particles);
   // =======================================================================
   return (
     <div
-      ref={containerRef}               // this connects <div> to WebGL canvas
+      ref={containerRef} // this connects <div> to WebGL canvas
       className="pointer-events-none absolute inset-0" // covers entire hero section
     />
   );
