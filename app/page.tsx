@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import EmailSignup from "@/components/EmailSignup";
 import { PromigratorHeroBackground } from "@/components/PromigratorHeroBackground";
 
@@ -8,43 +9,54 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* ===== TOP NAV ===== */}
-      <header className="sticky top-0 z-20 border-b border-zinc-800 bg-background">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-baseline gap-2">
-            <span className="text-lg font-semibold tracking-tight text-zinc-50">
-              Pro-Migrator
-            </span>
-            <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-              for FileMaker
-            </span>
-          </div>
+<header className="sticky top-0 z-20 border-b border-zinc-800 bg-background">
+  <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <div className="flex items-center gap-3">
+      {/* Logo */}
+      <div className="relative flex items-center">
+        <Image
+          src="/ProMigrator_DB_TopRedOrangeGreen_v1.png"
+          alt="ProMigrator Logo"
+          width={259}
+          height={314}
+          className="h-15 w-auto -mt-[2px] shrink-0"
+        />
+      </div>
 
-          <nav className="hidden items-center gap-8 text-sm text-zinc-400 md:flex">
-            <Link href="#products" className="hover:text-zinc-100">
-              Products
-            </Link>
-            <Link href="#why" className="hover:text-zinc-100">
-              Why Pro-Migrator
-            </Link>
-            <Link href="#beta" className="hover:text-zinc-100">
-              Beta access
-            </Link>
-            <a
-              href="mailto:info@promigrator.com"
-              className="rounded-full border border-zinc-700 px-3 py-1 text-xs font-medium text-zinc-100 hover:border-[#F95601] hover:text-[#F95601]"
-            >
-              Contact
-            </a>
-          </nav>
-        </div>
-      </header>
+      <div className="flex items-center gap-2">
+        <span className="text-lg font-semibold tracking-tight text-zinc-50">
+          ProMigrator
+        </span>
+        <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+          for FileMaker
+        </span>
+      </div>
+    </div>
+
+    <nav className="hidden items-center gap-8 text-sm text-zinc-400 md:flex">
+      <Link href="#products" className="hover:text-zinc-100">
+        Products
+      </Link>
+      <Link href="#why" className="hover:text-zinc-100">
+        Why ProMigrator
+      </Link>
+      <Link href="#beta" className="hover:text-zinc-100">
+        Beta access
+      </Link>
+      <a
+        href="mailto:info@promigrator.com"
+        className="rounded-full border border-zinc-700 px-3 py-1 text-xs font-medium text-zinc-100 hover:border-[#F95601] hover:text-[#F95601]"
+      >
+        Contact
+      </a>
+    </nav>
+  </div>
+</header>
 
       {/* ===== HERO (Single column, dark) ===== */}
-      <section className="relative border-b border-zinc-800 bg-background overflow-hidden">
-        {/* 3D background */}
+      <section className="relative border-b border-zinc-800 bg-background overflow-hidden min-h-[70vh]">
         <PromigratorHeroBackground />
 
-        {/* Hero content on top of 3D */}
         <div className="relative z-10 mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-zinc-500">
             Tools for serious FileMaker teams
@@ -57,7 +69,7 @@ export default function Home() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-zinc-400 md:text-base">
-            Pro-Migrator is a suite of purpose-built tools that bring SDLC,
+            ProMigrator is a suite of purpose-built tools that bring SDLC,
             CI/CD, PowerShell orchestration, and SQL Server integrations to
             FileMaker — without sacrificing the speed and flexibility of the
             platform.
@@ -86,7 +98,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== WHY PRO-MIGRATOR ===== */}
+      {/* ===== WHY PROMIGRATOR ===== */}
       <section
         id="why"
         className="border-b border-zinc-800 bg-background px-6 py-16"
@@ -97,7 +109,7 @@ export default function Home() {
               Built for teams who treat FileMaker like a mission-critical app.
             </h2>
             <p className="text-sm leading-relaxed text-zinc-400 md:text-base">
-              Pro-Migrator comes from real projects where FileMaker sits at the
+              ProMigrator comes from real projects where FileMaker sits at the
               center of healthcare, logistics, and enterprise workflows. These
               tools exist to reduce risk, simplify releases, and make your
               environment auditable and predictable.
@@ -148,7 +160,7 @@ export default function Home() {
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div className="space-y-2">
               <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 md:text-3xl">
-                The Pro-Migrator suite.
+                The ProMigrator suite.
               </h2>
               <p className="max-w-xl text-sm leading-relaxed text-zinc-400 md:text-base">
                 Three focused tools. One goal: make your FileMaker stack behave
@@ -233,7 +245,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-5xl flex-col gap-10 md:flex-row md:items-center">
           <div className="flex-1 space-y-3">
             <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 md:text-3xl">
-              Be first in line when Pro-Migrator ships.
+              Be first in line when ProMigrator ships.
             </h2>
             <p className="text-sm leading-relaxed text-zinc-400 md:text-base">
               Share your email and we&apos;ll send carefully curated updates —
@@ -252,7 +264,7 @@ export default function Home() {
       <footer className="border-t border-zinc-800 bg-background px-6 py-8">
         <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-xs text-zinc-500 md:flex-row md:items-center">
           <div>
-            <p>© {year} Pro-Migrator.</p>
+            <p>© {year} ProMigrator.</p>
             <p>A division of AMDyno, Inc.</p>
           </div>
           <div className="flex gap-4">

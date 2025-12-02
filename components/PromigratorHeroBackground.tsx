@@ -113,29 +113,35 @@ export function PromigratorHeroBackground() {
     // === NEON RINGS (DISABLED) ===========================================
     // =====================================================================
 
-    /*
+    
     // These created atomic-looking torus rings. You've disabled them.
-    const ringGroup = new THREE.Group();
-    scene.add(ringGroup);
+const ringGroup = new THREE.Group();
+scene.add(ringGroup);
 
-    const ringColors = [0x38bdf8, 0xa855f7, 0xf97316];
+const ringColors = [0xef4444, 0xf97316, 0x22c55e  ]; 
+// green, orange, red
 
-    ringColors.forEach((hex, index) => {
-      const ringGeo = new THREE.TorusGeometry(1.7 + index * 0.25, 0.05, 32, 200);
-      const ringMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(hex),
-        emissive: new THREE.Color(hex),
-        emissiveIntensity: 2.3,
-        metalness: 0.8,
-        roughness: 0.15,
-      });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = (index * Math.PI) / 6 + 0.6;
-      ring.rotation.y = (index * Math.PI) / 8;
-      ring.position.y = glassSphere.position.y;
-      ringGroup.add(ring);
-    });
-    */
+ringColors.forEach((hex, index) => {
+  const ringGeo = new THREE.TorusGeometry(1.7 + index * 0.25, 0.05, 32, 200);
+  const ringMat = new THREE.MeshStandardMaterial({
+    color: new THREE.Color(hex),
+    emissive: new THREE.Color(hex),
+    emissiveIntensity: 0.03,
+    metalness: 0.05,
+    roughness: 0.05,
+
+    // MAKE THEM OPAQUE
+    transparent: true,   // allows opacity control
+    opacity: 4.2         // 1.0 = fully opaque; lower for more transparency
+  });
+
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.rotation.x = (index * Math.PI) / 4 + 0.6;
+  ring.rotation.y = (index * Math.PI) / 8;
+  ring.position.y = glassSphere.position.y;
+  ringGroup.add(ring);
+});
+
 
     // =====================================================================
     // === FLOATING PARTICLES (FILEMAKER LOGO SPRITES) =====================
@@ -143,7 +149,7 @@ export function PromigratorHeroBackground() {
 
     // 1. Create buffer geometry for ~400 floating particles
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 400;
+    const particlesCount = 2000;
     const positions = new Float32Array(particlesCount * 3); // x,y,z per particle
 
     // Fill position array with randomly distributed points
@@ -166,21 +172,21 @@ export function PromigratorHeroBackground() {
     // Loader to fetch the logo texture from Next.js /public folder.
     // Place the file at: public/claris_logo_white.png
     const logoTexture = new THREE.TextureLoader().load(
-      "/claris_logo_white.png"
+      "/ProMigrator_DB_TopRedOrangeGreen_v1.png"
     );
 
     // PointsMaterial now uses the FileMaker/Claris logo as a sprite.
     // Each particle will be a tiny logo billboarded to the camera.
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.07, // visual size of each logo (tweak as needed)
+      size: 0.05, // visual size of each logo (tweak as needed)
       map: logoTexture, // use the uploaded logo as the sprite
       color: 0xffffff, // tint color (white = original texture colors)
       transparent: true, // allow alpha from the PNG
       opacity: 0.9, // overall visibility
       alphaTest: 0.5, // discard nearly-transparent pixels (helps remove box edges)
-      depthWrite: false, // keeps particles from punching holes in each other
+      depthWrite: true, // keeps particles from punching holes in each other
       sizeAttenuation: true, // makes them smaller when farther away
-      // blending: THREE.AdditiveBlending, // enable this if you want glowier look
+     // blending: THREE.AdditiveBlending, // enable this if you want glowier look
     });
 
     // Final particle system object
@@ -279,7 +285,7 @@ export function PromigratorHeroBackground() {
       core.position.y = 0.5 + Math.sin(t * 1.5) * 0.08;
 
       // Rotate the particle swarm slowly
-      particles.rotation.y += 0.0008;
+      particles.rotation.y += 0.0010;
       particles.rotation.x = Math.sin(t * 0.05) * 0.1;
 
       // Soft oscillation for lights
