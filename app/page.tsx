@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import EmailSignup from "@/components/EmailSignup";
 import { PromigratorHeroBackground } from "@/components/PromigratorHeroBackground";
-
+/* Data fetching and server components can be added here in the future */
 export default function Home() {
   const year = new Date().getFullYear();
 
