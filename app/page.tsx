@@ -15,7 +15,8 @@ export default function Home() {
       {/* Logo */}
       <div className="relative flex items-center">
         <Image
-          src="/ProMigrator_DB_TopRedOrangeGreen_v1.png"
+//          src="/ProMigrator_DB_TopRedOrangeGreen_v1.png"
+                    src="/ProMigrator_v7.png"
           alt="ProMigrator Logo"
           width={259}
           height={314}

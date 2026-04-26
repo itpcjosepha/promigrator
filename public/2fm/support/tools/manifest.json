@@ -1,0 +1,38 @@
+{
+  "tools": {
+    "mac": {
+      "fmdm": {
+        "name": "FMDataMigration",
+        "version": "21.1.8.123",
+        "url": "https://promigrator.com/2fm/support/tools/FMDataMigration-mac-21.1.8.123.zip"
+      },
+      "fmdt": {
+        "name": "FMDeveloperTool",
+        "version": "22.0.6.600",
+        "url": "https://promigrator.com/2fm/support/tools/FMDeveloperTool-runtime-mac-22.0.6.600.zip"
+      },
+      "fmut": {
+        "name": "FMUpgradeTool",
+        "version": "22.0.6.600",
+        "url": "https://promigrator.com/2fm/support/tools/FMUpgradeTool-runtime-mac-22.0.6.600.zip"
+      }
+    },
+    "win": {
+      "fmdm": {
+        "name": "FMDataMigration",
+        "version": "21.1.8.123",
+        "url": "https://promigrator.com/2fm/support/tools/FMDataMigration-win-21.1.8.123.zip"
+      },
+      "fmdt": {
+        "name": "FMDeveloperTool",
+        "version": "22.0.6.600",
+        "url": "https://promigrator.com/2fm/support/tools/FMDeveloperTool-runtime-win-22.0.6.600.zip"
+      },
+      "fmut": {
+        "name": "FMUpgradeTool",
+        "version": "22.0.6.600",
+        "url": "https://promigrator.com/2fm/support/tools/FMUpgradeTool-runtime-win-22.0.6.600.zip"
+      }
+    }
+  }
+}

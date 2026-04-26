@@ -172,7 +172,8 @@ ringColors.forEach((hex, index) => {
     // Loader to fetch the logo texture from Next.js /public folder.
     // Place the file at: public/claris_logo_white.png
     const logoTexture = new THREE.TextureLoader().load(
-      "/ProMigrator_DB_TopRedOrangeGreen_v1.png"
+      "/ProMigrator_v2.png"
+//"/ProMigrator_v2.png"
     );
 
     // PointsMaterial now uses the FileMaker/Claris logo as a sprite.
@@ -180,10 +181,10 @@ ringColors.forEach((hex, index) => {
     const particlesMaterial = new THREE.PointsMaterial({
       size: 0.05, // visual size of each logo (tweak as needed)
       map: logoTexture, // use the uploaded logo as the sprite
-      color: 0xffffff, // tint color (white = original texture colors)
+      color: 0x2FD699, // tint color (white = original texture colors)
       transparent: true, // allow alpha from the PNG
-      opacity: 0.9, // overall visibility
-      alphaTest: 0.5, // discard nearly-transparent pixels (helps remove box edges)
+      opacity: 0.6, // overall visibility
+      alphaTest: 0.1, // discard nearly-transparent pixels (helps remove box edges)
       depthWrite: true, // keeps particles from punching holes in each other
       sizeAttenuation: true, // makes them smaller when farther away
      // blending: THREE.AdditiveBlending, // enable this if you want glowier look

@@ -41,3 +41,11 @@ yarn-error.log*
 next-env.d.ts
 
 /app/generated/prisma
+
+# Large runtime archives
+app/tools/.zip
+public/2fm/support/tools/.zip
+
+# large runtime archives
+app/tools/*.zip
+public/2fm/support/tools/*.zip
