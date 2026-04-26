@@ -46,6 +46,4 @@ next-env.d.ts
 app/tools/.zip
 public/2fm/support/tools/.zip
 
-# large runtime archives
-app/tools/*.zip
-public/2fm/support/tools/*.zip
+
