@@ -4,34 +4,34 @@
       "fmdm": {
         "name": "FMDataMigration",
         "version": "22.0.6.600",
-        "url": "https://github.com/itpcjosepha/promigrator/releases/download/2fmTools/FMDataMigration-runtime-mac-22.0.6.600.zip"
+        "url": "https://promigrator.com/2fmTools/FMDataMigration-runtime-mac-22.0.6.600.zip"
       },
       "fmdt": {
         "name": "FMDeveloperTool",
         "version": "22.0.6.600",
-        "url": "https://github.com/itpcjosepha/promigrator/releases/download/2fmTools/FMDeveloperTool-runtime-mac-22.0.6.600.zip"
+        "url": "https://promigrator.com/2fmTools/FMDeveloperTool-runtime-mac-22.0.6.600.zip"
       },
       "fmut": {
         "name": "FMUpgradeTool",
         "version": "22.0.6.600",
-        "url": "https://github.com/itpcjosepha/promigrator/releases/download/2fmTools/FMUpgradeTool-runtime-mac-22.0.6.600.zip"
+        "url": "https://promigrator.com/2fmTools/FMUpgradeTool-runtime-mac-22.0.6.600.zip"
       }
     },
     "win": {
       "fmdm": {
         "name": "FMDataMigration",
         "version": "22.0.2.204",
-        "url": "https://github.com/itpcjosepha/promigrator/releases/download/2fmTools/FMDataMigration-runtime-win-22.0.2.204.zip"
+        "url": "https://promigrator.com/2fmTools/FMDataMigration-runtime-win-22.0.2.204.zip"
       },
       "fmdt": {
         "name": "FMDeveloperTool",
         "version": "22.0.2.204",
-        "url": "https://github.com/itpcjosepha/promigrator/releases/download/2fmTools/FMDeveloperTool-runtime-win-22.0.2.204.zip"
+        "url": "https://promigrator.com/2fmTools/FMDeveloperTool-runtime-win-22.0.2.204.zip"
       },
       "fmut": {
         "name": "FMUpgradeTool",
         "version": "22.0.2.204",
-        "url": "https://github.com/itpcjosepha/promigrator/releases/download/2fmTools/FMUpgradeTool-runtime-win-22.0.2.204.zip"
+        "url": "https://promigrator.com/2fmTools/FMUpgradeTool-runtime-win-22.0.2.204.zip"
       }
     }
   }
